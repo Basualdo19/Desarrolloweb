@@ -1,0 +1,53 @@
+<div class="student-list">
+  <header>
+    <h1>Estudiantes</h1>
+    <a routerLink="/nuevo" class="btn btn-primary">+ Nuevo estudiante</a>
+  </header>
+
+  <input
+    type="text"
+    placeholder="Buscar por nombre, apellido o DNI..."
+    class="search-input"
+    (input)="onFilterChange($any($event.target).value)"
+  />
+
+  @if (students().length === 0) {
+    <p class="empty">No hay estudiantes registrados.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>DNI</th>
+          <th>Email</th>
+          <th>Carrera</th>
+          <th>Año</th>
+          <th>Promedio</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (student of students(); track student.id) {
+          <tr>
+            <td>{{ student.nombre }} {{ student.apellido }}</td>
+            <td>{{ student.dni }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.carrera }}</td>
+            <td>{{ student.anio }}</td>
+            <td>{{ student.promedio }}</td>
+            <td>
+              <span class="badge" [class.badge-active]="student.estado === 'activo'">
+                {{ student.estado }}
+              </span>
+            </td>
+            <td class="actions">
+              <a [routerLink]="['/editar', student.id]" class="btn btn-secondary">Editar</a>
+              <button (click)="delete(student.id)" class="btn btn-danger">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

@@ -1,0 +1,87 @@
+<div class="student-form">
+  <h1>{{ isEditMode ? 'Editar estudiante' : 'Nuevo estudiante' }}</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="row">
+      <label>
+        Nombre
+        <input type="text" formControlName="nombre" />
+        @if (form.controls.nombre.invalid && form.controls.nombre.touched) {
+          <span class="error">Requerido</span>
+        }
+      </label>
+
+      <label>
+        Apellido
+        <input type="text" formControlName="apellido" />
+        @if (form.controls.apellido.invalid && form.controls.apellido.touched) {
+          <span class="error">Requerido</span>
+        }
+      </label>
+    </div>
+
+    <div class="row">
+      <label>
+        DNI
+        <input type="text" formControlName="dni" />
+        @if (form.controls.dni.invalid && form.controls.dni.touched) {
+          <span class="error">Requerido</span>
+        }
+      </label>
+
+      <label>
+        Email
+        <input type="email" formControlName="email" />
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+          <span class="error">Email inválido</span>
+        }
+      </label>
+    </div>
+
+    <div class="row">
+      <label>
+        Fecha de nacimiento
+        <input type="date" formControlName="fechaNacimiento" />
+        @if (form.controls.fechaNacimiento.invalid && form.controls.fechaNacimiento.touched) {
+          <span class="error">Requerido</span>
+        }
+      </label>
+
+      <label>
+        Carrera
+        <input type="text" formControlName="carrera" />
+        @if (form.controls.carrera.invalid && form.controls.carrera.touched) {
+          <span class="error">Requerido</span>
+        }
+      </label>
+    </div>
+
+    <div class="row">
+      <label>
+        Año
+        <input type="number" formControlName="anio" min="1" />
+      </label>
+
+      <label>
+        Promedio
+        <input type="number" formControlName="promedio" min="0" max="10" step="0.1" />
+        @if (form.controls.promedio.invalid && form.controls.promedio.touched) {
+          <span class="error">Debe estar entre 0 y 10</span>
+        }
+      </label>
+
+      <label>
+        Estado
+        <select formControlName="estado">
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>
